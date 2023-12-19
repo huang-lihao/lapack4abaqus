@@ -50,11 +50,9 @@ def gen_lapack(
                         key = target[space+1:bra]
                         if key not in keys:
                             keys.append(key)
-    print(keys)
     for file in files.values():
         with open(file, 'r') as f:
             for line in f.readlines():
-                print(line)
                 for k in keys:
                     line = line.replace(k.lower(), "k"+k.lower())
                     line = line.replace(k.upper(), "K"+k.upper())
