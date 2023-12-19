@@ -26,22 +26,38 @@ def gen_lapack(
         os.remove(f"{function}.zip")
     
     
-    folders = ['lapack/util', 'lapack/lapack_routine']
+    folders = [r'lapack\util', r'lapack\lapack_routine']
     out = open('lapack.f', 'w')
     files = {}
+    keys = []
     for folder in folders:
         for f in os.listdir(folder):
             file = os.path.join(folder, f)
             files[f.strip(".f")] = file
+
+    pattern_subroutine = re.compile(r"SUBROUTINE ([a-zA-Z0-9]+)\(")
+    pattern_function = re.compile(r"FUNCTION ([a-zA-Z0-9]+)\(")
     for file in files.values():
         with open(file, 'r') as f:
             for line in f.readlines():
-                for k in files.keys():
-                    if "k"+k.lower() not in line:
-                        line = line.replace(k.lower(), "k"+k.lower())
-                    if "K"+k.upper() not in line:
-                        line = line.replace(k.upper(), "K"+k.upper())
-                    pass
+                for pattern in [pattern_subroutine, pattern_function]:
+                    res = pattern.search(line)
+                    if res:
+                        span = res.span()
+                        target = line[span[0]:span[1]]
+                        space = target.index(" ")
+                        bra = target.index("(")
+                        key = target[space+1:bra]
+                        if key not in keys:
+                            keys.append(key)
+    print(keys)
+    for file in files.values():
+        with open(file, 'r') as f:
+            for line in f.readlines():
+                print(line)
+                for k in keys:
+                    line = line.replace(k.lower(), "k"+k.lower())
+                    line = line.replace(k.upper(), "K"+k.upper())
                 out.writelines([line])
     out.close()
 
