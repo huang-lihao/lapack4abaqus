@@ -34,6 +34,7 @@ def gen_lapack(
         for f in os.listdir(folder):
             file = os.path.join(folder, f)
             files[f.strip(".f")] = file
+            out.write(f"      include '{file}'\n")
 
     pattern_subroutine = re.compile(r"SUBROUTINE ([a-zA-Z0-9]+)\(")
     pattern_function = re.compile(r"FUNCTION ([a-zA-Z0-9]+)\(")
@@ -51,12 +52,17 @@ def gen_lapack(
                         if key not in keys:
                             keys.append(key)
     for file in files.values():
+        lines = []
         with open(file, 'r') as f:
             for line in f.readlines():
                 for k in keys:
                     line = line.replace(k.lower(), "k"+k.lower())
                     line = line.replace(k.upper(), "K"+k.upper())
-                out.writelines([line])
+                line = line.replace("stop".lower(), "call xit".lower())
+                line = line.replace("stop".upper(), "call xit".upper())
+                lines.append(line)
+        with open(file, 'w') as f:
+            f.writelines(lines)
     out.close()
 
 
