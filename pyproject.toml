@@ -1,0 +1,31 @@
+[project]
+name = "lapack4abaqus"
+authors = [
+  { name="HUANG Lihao", email="huang-lihao@outlook.com" },
+]
+description = "Create lapack.f for Abaqus to include."
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [ # Optional
+]
+dynamic = ["version"]
+
+[project.urls]
+"Homepage" = "https://github.com/huang-lihao/lapack4abaqus"
+"Bug Tracker" = "https://github.com/huang-lihao/lapack4abaqus/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+write_to = "src/lapack4abaqus/_version.py"
+local_scheme = "no-local-version"
