@@ -4,6 +4,7 @@
 [![Upload Python Package](https://github.com/huang-lihao/lapack4abaqus/actions/workflows/python-publish.yml/badge.svg)](https://github.com/huang-lihao/lapack4abaqus/actions/workflows/python-publish.yml)
 [![PyPI - Version](https://img.shields.io/pypi/v/lapack4abaqus?logo=pypi)](https://pypi.org/project/lapack4abaqus/)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/lapack4abaqus?logo=PyPI)](https://pypi.org/project/lapack4abaqus/)
+[![GitHub License](https://img.shields.io/github/license/huang-lihao/lapack4abaqus)](https://github.com/huang-lihao/lapack4abaqus/blob/main/LICENSE)
 
 Create `lapack.f` for Abaqus to include, by adding `k` to the name of each subroutine and function.
 
