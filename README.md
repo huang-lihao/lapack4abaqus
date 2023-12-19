@@ -8,9 +8,7 @@
 Create `lapack.f` for Abaqus to include (Add `k` to the name of each subroutine and function).
 
 # Install
-Use PyPI to install [# lapack4abaqus
-](https://pypi.org/project/# lapack4abaqus
-/):
+Use PyPI to install [lapack4abaqus](https://pypi.org/project/lapack4abaqus/):
 ```sh
 pip install lapack4abaqus
 ```
