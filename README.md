@@ -14,6 +14,7 @@ pip install lapack4abaqus
 ```
 
 # Usage
+Run the following script, then you will get the desired `lapack.f` to include.
 ```python
 from lapack4abaqus import gen_lapack
 
