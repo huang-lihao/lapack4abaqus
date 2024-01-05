@@ -3,6 +3,11 @@ import re
 import urllib.request
 import zipfile
 
+replace_keys = {
+    "stop": "call xit",
+    "write( *": "write( 7",
+}
+
 def netlib_url(
     function: str,
 ):
@@ -58,8 +63,9 @@ def gen_lapack(
                 for k in keys:
                     line = line.replace(k.lower(), "k"+k.lower())
                     line = line.replace(k.upper(), "K"+k.upper())
-                line = line.replace("stop".lower(), "call xit".lower())
-                line = line.replace("stop".upper(), "call xit".upper())
+                for origin, target in replace_keys.items():
+                    line = line.replace(origin.lower(), target.lower())
+                    line = line.replace(origin.upper(), target.upper())
                 lines.append(line)
         with open(file, 'w') as f:
             f.writelines(lines)
