@@ -31,12 +31,15 @@ def gen_lapack(
         os.remove(f"{function}.zip")
     
     
-    folders = [".\\lapack\\util\\", ".\\lapack\\lapack_routine\\"]
+    folders = [
+        os.path.join(".", "lapack", "util"),
+        os.path.join(".", "lapack", "lapack_routine")
+    ]
     out = open('lapack.f', 'w')
     files = {}
     keys = []
     print(os.listdir("."))
-    print(os.listdir("lapack"))
+    print(os.listdir(os.path.join(".", "lapack")))
     for folder in folders:
         for f in os.listdir(folder):
             file = os.path.join(folder, f)
