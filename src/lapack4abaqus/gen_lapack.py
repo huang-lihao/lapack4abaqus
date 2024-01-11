@@ -38,8 +38,6 @@ def gen_lapack(
     out = open('lapack.f', 'w')
     files = {}
     keys = []
-    print(os.listdir("."))
-    print(os.listdir(os.path.join(".", "lapack")))
     for folder in folders:
         for f in os.listdir(folder):
             file = os.path.join(folder, f)
