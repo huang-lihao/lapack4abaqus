@@ -31,7 +31,7 @@ def gen_lapack(
         os.remove(f"{function}.zip")
     
     
-    folders = [r'lapack\util', r'lapack\lapack_routine']
+    folders = [r'.\lapack\util', r'.\lapack\lapack_routine']
     out = open('lapack.f', 'w')
     files = {}
     keys = []
