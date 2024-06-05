@@ -15,19 +15,24 @@ def netlib_url(
 
 def gen_lapack(
     functions: list = [],
+    output_folder: str = None,
+    silent: bool = False,
 ):
+    cwd = os.getcwd()
+    if output_folder:
+        os.chdir(output_folder)
     for function in functions:
         url = netlib_url(function)
-        print(f"Downloading {function}.zip from {url}...")
+        if not silent: print(f"Downloading {function}.zip from {url}...")
         with urllib.request.urlopen(url) as response:
             with open(f"{function}.zip", "wb") as f:
                 f.write(response.read())
-        print(f"Downloaded {function}.zip from {url}.")
-        print(f"Unzipping {function}.zip...")
+        if not silent: print(f"Downloaded {function}.zip from {url}.")
+        if not silent: print(f"Unzipping {function}.zip...")
         with zipfile.ZipFile(f"{function}.zip", "r") as zip_ref:
             zip_ref.extractall(".")
-        print(f"Unzipped {function}.zip.")
-        print(f"Removing {function}.zip...")
+        if not silent: print(f"Unzipped {function}.zip.")
+        if not silent: print(f"Removing {function}.zip...")
         os.remove(f"{function}.zip")
     
     
@@ -73,5 +78,5 @@ def gen_lapack(
         with open(file, 'w') as f:
             f.writelines(lines)
     out.close()
-
+    os.chdir(cwd)
 
