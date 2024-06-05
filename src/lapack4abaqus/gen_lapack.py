@@ -64,11 +64,20 @@ def gen_lapack(
                         key = target[space+1:bra]
                         if key not in keys:
                             keys.append(key)
+    
+    superstring = {}
+    for k in keys:
+        for k2 in keys:
+            if k2.find(k) != -1 and k2 != k:
+                superstring[k] = k2
+
     for file in files.values():
         lines = []
         with open(file, 'r') as f:
             for line in f.readlines():
                 for k in keys:
+                    if k in superstring and line.find(superstring[k]) != -1:
+                        continue
                     line = line.replace(k.lower(), "k"+k.lower())
                     line = line.replace(k.upper(), "K"+k.upper())
                 for origin, target in replace_keys.items():
